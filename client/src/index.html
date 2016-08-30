@@ -1,0 +1,107 @@
+<!DOCTYPE <!doctype html>
+<html ng-app="app">
+    <head>
+    <!--inject:css-->
+	<link rel="stylesheet" href="css/index.css">
+	<!--endinject-->
+	<!--bower:css-->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+	<!--endbower-->
+    </head>
+    <body ng-controller="TodoController as boom">
+	<div class="container">
+		<!-- Header -->
+		<div>
+			<h1>Get it Done Application</h1>
+			<h2>Let's sort out your life!</h2>
+		</div>
+		<!-- Add task  -->
+		<div>
+			<p>
+				<label>Task</label>
+				<input type="text" ng-model="boom.blankTodo.task">
+			</p>
+		</div>
+		<!-- Set Priority -->
+		<div>
+			<p>
+				<label>Priority</label>
+				<span>
+					<select ng-model="boom.blankTodo.priority">
+						<option value="">Set Priority</option>
+						<option value="1">High Priority</option>
+						<option value="2">Medium Priority</option>
+						<option value="3">Low Priority</option>
+					</select>
+				</span>
+			</p>
+		<!-- Submit Button -->
+			<p>
+				<button ng-click="boom.addTodo()">Add Task</button>
+			</p>
+		</div>
+		<!-- Table of Task -->
+		<div>
+			<h2>Manage Your Tasks Here</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Priority</th>
+						<th>Manage</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in boom.todos">
+						<td>
+							<span ng-hide="x.edit">
+								{{x.task}}
+							</span>
+							<span ng-show="x.edit">
+								<!-- This input gives the user the option to edit a task -->
+								<input type="text" ng-model="x.task">
+							</span>
+						</td>
+						<td>
+							<span ng-hide="x.edit">
+								{{x.priority}}
+							</span>
+							<span ng-show="x.edit">
+							<!-- This select tag gives the user the option to edit a priority -->
+								<select ng-model="x.priority">
+									<option value="">Set Priority</option>
+									<option value="1">High Priority</option>
+									<option value="2">Medium Priority</option>
+									<option value="3">Low Priority</option>
+								</select>	
+							</span>
+						</td>
+						<td>
+							<span ng-hide="x.edit">
+								<button ng-click="x.edit = true;">Edit</button>
+								<button ng-click="boom.removeTodo(x);">Remove</button>
+							</span>
+							<span ng-show="x.edit">
+								<button ng-click="boom.updateTodo(x)">Update</button>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!--bower:js-->
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<!--endbower-->
+	<!--inject:js-->
+	<script src="app/app.module.js"></script>
+	<script src="app/factory/data.factory.js"></script>
+	<script src="app/controller/todo.controller.js"></script>
+	<!--endinject-->
+    </body>
+</html>
+
+
+
